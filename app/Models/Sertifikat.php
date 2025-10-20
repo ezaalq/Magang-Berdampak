@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Sertifikat extends Model
+{
+    use HasFactory;
+    protected $table = 'sertifikat';
+    protected $fillable = [
+        'id_mahasiswa', 'file_sertifikat'
+    ];
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');
+    }
+}

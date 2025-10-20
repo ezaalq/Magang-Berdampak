@@ -1,0 +1,161 @@
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <!-- Menu -->
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+      <div class="app-brand demo">
+        <a href="{{ route('dashboard') }}" class="app-brand-link">
+          <span class="app-brand-logo demo">
+            <i class="menu-icon tf-icons bx bx-book-reader text-primary" style="font-size: 2rem;"></i>
+          </span>
+          <span class="fw-bolder ms-2" style="font-size: 1.2rem">Magang <br> Berdampak</span>
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+          <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+      </div>
+
+      <div class="menu-inner-shadow"></div>
+
+      <ul class="menu-inner py-1">
+        <!-- Dashboard -->
+        <li class="menu-item {{ Request::is('dashboard') ? 'active' : '' }}">
+          <a href="{{ route('dashboard') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-dashboard"></i>
+            <div data-i18n="Analytics">Dashboard</div>
+          </a>
+        </li>
+
+        <!-- Library Management -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Manajemen Magang</span></li>
+
+
+        <li class="menu-item {{ Request::is('mahasiswa*') ? 'active' : '' }}">
+          <a href="{{ route('mahasiswa.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-user"></i>
+            <div data-i18n="Mahasiswa">Mahasiswa</div>
+          </a>
+        </li>
+        <li class="menu-item {{ Request::is('absen*') ? 'active' : '' }}">
+          <a href="{{ route('absen.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-calendar-check"></i>
+            <div data-i18n="Absen">Absen</div>
+          </a>
+        </li>
+        <li class="menu-item {{ Request::is('kegiatan*') ? 'active' : '' }}">
+          <a href="{{ route('kegiatan.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-task"></i>
+            <div data-i18n="Kegiatan">Kegiatan</div>
+          </a>
+        </li>
+        <li class="menu-item {{ Request::is('laporan*') ? 'active' : '' }}">
+          <a href="{{ route('laporan.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-file"></i>
+            <div data-i18n="Laporan">Laporan</div>
+          </a>
+        </li>
+        <li class="menu-item {{ Request::is('nilai_index*') ? 'active' : '' }}">
+          <a href="{{ route('nilai_index.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-bar-chart"></i>
+            <div data-i18n="Nilai Index">Nilai Index</div>
+          </a>
+        </li>
+        <li class="menu-item {{ Request::is('sertifikat*') ? 'active' : '' }}">
+          <a href="{{ route('sertifikat.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-certification"></i>
+            <div data-i18n="Sertifikat">Sertifikat</div>
+          </a>
+        </li>
+
+        <!-- Categories -->
+        {{-- <li class="menu-item {{ Request::is('kategori*') ? 'active' : '' }}">
+          <a href="{{ route('kategori.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-category"></i>
+            <div data-i18n="Categories">Kategori</div>
+          </a>
+        </li> --}}
+
+
+        <!-- Officers -->
+        {{-- @if (Auth::user()->Role === 'admin')
+        <li class="menu-item {{ Request::is('petugas*') ? 'active' : '' }}">
+          <a href="{{ route('petugas.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-id-card"></i>
+            <div data-i18n="Officers">Petugas</div>
+          </a>
+        </li>
+        @endif --}}
+
+        <!-- Members -->
+        {{-- <li class="menu-item {{ Request::is('anggota*') && !Request::is('anggota-non-siswa*') ? 'active' : '' }}">
+          <a href="{{ route('anggota.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-user"></i>
+            <div data-i18n="Members">Anggota Siswa</div>
+          </a>
+        </li> --}}
+
+        <!-- Non-Student Members -->
+        {{-- <li class="menu-item {{ Request::is('anggota-non-siswa*') ? 'active' : '' }}">
+          <a href="{{ route('anggota-non-siswa.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-user-pin"></i>
+            <div data-i18n="Non-Student Members">Anggota Non Siswa</div>
+          </a>
+        </li> --}}
+
+        <!-- Transactions -->
+        {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Transaksi</span></li>
+
+        <!-- Borrowing -->
+        <li class="menu-item {{ Request::is('peminjaman*') ? 'active' : '' }}">
+          <a href="{{ route('peminjaman.index') }}" class="menu-link">
+            <i class='menu-icon tf-icons bx bx-cart-plus'></i>
+            <div data-i18n="Borrowing">Peminjaman</div>
+          </a>
+        </li> --}}
+
+        <!-- Returns -->
+        {{-- <li class="menu-item {{ Request::is('pengembalian*') ? 'active' : '' }}">
+          <a href="{{ route('pengembalian.index') }}" class="menu-link">
+            <i class='menu-icon tf-icons bx bx-calendar-detail'></i>
+            <div data-i18n="Returns">Pengembalian</div>
+          </a>
+        </li> --}}
+
+        <!-- Reports -->
+        {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
+
+        <!-- All Reports -->
+        <li class="menu-item {{ Request::is('laporan*') ? 'active' : '' }}">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-file-report"></i>
+            <div data-i18n="Reports">Laporan</div>
+          </a>
+          <ul class="menu-sub">
+              @if (Auth::user()->Role === 'admin')
+              <li class="menu-item {{ Request::is('laporan/buku*') ? 'active' : '' }}">
+                <a href="{{ route('laporan.laporanBuku.index') }}" class="menu-link">
+                  <div data-i18n="Late Returns Report">Buku</div>
+                </a>
+              </li>
+              <li class="menu-item {{ Request::is('laporan/anggota*') ? 'active' : '' }}">
+                <a href="{{ route('laporan.laporanAnggota.index') }}" class="menu-link">
+                  <div data-i18n="Late Returns Report">Anggota</div>
+                </a>
+              </li>
+              @endif
+            <li class="menu-item {{ Request::is('laporan/peminjaman*') ? 'active' : '' }}">
+              <a href="{{ route('laporan.peminjaman.index') }}" class="menu-link">
+                <div data-i18n="Borrowing Report">Peminjaman</div>
+              </a>
+            </li>
+            <li class="menu-item {{ Request::is('laporan/pengembalian*') ? 'active' : '' }}">
+              <a href="{{ route('laporan.laporanPengembalian.index') }}" class="menu-link">
+                <div data-i18n="Late Returns Report">Pengembalian & Denda</div>
+              </a>
+            </li>
+          </ul>
+        </li> --}}
+      </ul>
+    </aside>
+    <!-- / Menu -->
