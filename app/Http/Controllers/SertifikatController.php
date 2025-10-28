@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Sertifikat;
 use App\Models\Mahasiswa;
@@ -25,11 +27,24 @@ class SertifikatController extends Controller
     {
         $data = $request->validate([
             'id_mahasiswa' => 'required|exists:tabel_mahasiswa,id_mahasiswa',
-            'file_sertifikat' => 'required|file|mimes:pdf,jpg,jpeg,png',
+            'nama_sertifikat' => 'required|string|max:255',
+            'tanggal_terbit' => 'required|date',
+            'deskripsi' => 'nullable|string',
         ]);
-        if ($request->hasFile('file_sertifikat')) {
-            $data['file_sertifikat'] = $request->file('file_sertifikat')->store('file_sertifikat', 'public');
-        }
+
+        // Fetch student data
+        $mahasiswa = Mahasiswa::findOrFail($data['id_mahasiswa']);
+
+        // Generate PDF
+        $pdf = Pdf::loadView('sertifikat.certificate', compact('mahasiswa', 'data'));
+
+        // Save PDF to storage
+        $filename = 'certificate_' . $data['id_mahasiswa'] . '_' . time() . '.pdf';
+        $path = 'certificates/' . $filename;
+        Storage::disk('public')->put($path, $pdf->output());
+
+        $data['file_sertifikat'] = $path;
+
         Sertifikat::create($data);
         return redirect()->route('sertifikat.index')->with('success', 'Sertifikat berhasil ditambahkan.');
     }
@@ -52,11 +67,24 @@ class SertifikatController extends Controller
         $sertifikat = Sertifikat::findOrFail($id);
         $data = $request->validate([
             'id_mahasiswa' => 'required|exists:tabel_mahasiswa,id_mahasiswa',
-            'file_sertifikat' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'nama_sertifikat' => 'required|string|max:255',
+            'tanggal_terbit' => 'required|date',
+            'deskripsi' => 'nullable|string',
         ]);
-        if ($request->hasFile('file_sertifikat')) {
-            $data['file_sertifikat'] = $request->file('file_sertifikat')->store('file_sertifikat', 'public');
-        }
+
+        // Fetch student data
+        $mahasiswa = Mahasiswa::findOrFail($data['id_mahasiswa']);
+
+        // Generate PDF
+        $pdf = Pdf::loadView('sertifikat.certificate', compact('mahasiswa', 'data'));
+
+        // Save PDF to storage
+        $filename = 'certificate_' . $data['id_mahasiswa'] . '_' . time() . '.pdf';
+        $path = 'certificates/' . $filename;
+        Storage::disk('public')->put($path, $pdf->output());
+
+        $data['file_sertifikat'] = $path;
+
         $sertifikat->update($data);
         return redirect()->route('sertifikat.index')->with('success', 'Sertifikat berhasil diupdate.');
     }
@@ -64,6 +92,9 @@ class SertifikatController extends Controller
     public function destroy($id)
     {
         $sertifikat = Sertifikat::findOrFail($id);
+        if ($sertifikat->file_sertifikat && Storage::disk('public')->exists($sertifikat->file_sertifikat)) {
+            Storage::disk('public')->delete($sertifikat->file_sertifikat);
+        }
         $sertifikat->delete();
         return redirect()->route('sertifikat.index')->with('success', 'Sertifikat berhasil dihapus.');
     }

@@ -17,6 +17,9 @@
                     <tr>
                         <th>Nim</th>
                         <th>Nama Mahasiswa</th>
+                        <th>Nama Sertifikat</th>
+                        <th>Tanggal Terbit</th>
+                        <th>Deskripsi</th>
                         <th>File Sertifikat</th>
                         <th>Aksi</th>
                     </tr>
@@ -26,6 +29,9 @@
                     <tr>
                         <td>{{ $sertifikat->mahasiswa->nim ?? '-' }}</td>
                         <td>{{ $sertifikat->mahasiswa->nama ?? '-' }}</td>
+                        <td>{{ $sertifikat->nama_sertifikat ?? '-' }}</td>
+                        <td>{{ $sertifikat->tanggal_terbit ? \Carbon\Carbon::parse($sertifikat->tanggal_terbit)->format('d/m/Y') : '-' }}</td>
+                        <td>{{ $sertifikat->deskripsi ?? '-' }}</td>
                         <td>
                             @if($sertifikat->file_sertifikat)
                                 <a href="{{ asset('storage/' . $sertifikat->file_sertifikat) }}" target="_blank">Lihat Sertifikat</a>
@@ -59,11 +65,16 @@
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="file_sertifikat_edit{{ $sertifikat->id_sertifikat }}" class="form-label">File Sertifikat (Kosongkan jika tidak ingin mengubah)</label>
-                                            <input type="file" class="form-control" id="file_sertifikat_edit{{ $sertifikat->id_sertifikat }}" name="file_sertifikat" accept="application/pdf,image/*">
-                                            @if($sertifikat->file_sertifikat)
-                                                <small class="text-muted">File saat ini: <a href="{{ asset('storage/' . $sertifikat->file_sertifikat) }}" target="_blank">Lihat Sertifikat</a></small>
-                                            @endif
+                                            <label for="nama_sertifikat_edit{{ $sertifikat->id_sertifikat }}" class="form-label">Nama Sertifikat</label>
+                                            <input type="text" class="form-control" id="nama_sertifikat_edit{{ $sertifikat->id_sertifikat }}" name="nama_sertifikat" value="{{ $sertifikat->nama_sertifikat }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tanggal_terbit_edit{{ $sertifikat->id_sertifikat }}" class="form-label">Tanggal Terbit</label>
+                                            <input type="date" class="form-control" id="tanggal_terbit_edit{{ $sertifikat->id_sertifikat }}" name="tanggal_terbit" value="{{ $sertifikat->tanggal_terbit }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="deskripsi_edit{{ $sertifikat->id_sertifikat }}" class="form-label">Deskripsi</label>
+                                            <textarea class="form-control" id="deskripsi_edit{{ $sertifikat->id_sertifikat }}" name="deskripsi" rows="3">{{ $sertifikat->deskripsi }}</textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -124,8 +135,16 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="file_sertifikat" class="form-label">File Sertifikat</label>
-                                <input type="file" class="form-control" id="file_sertifikat" name="file_sertifikat" accept="application/pdf,image/*" required>
+                                <label for="nama_sertifikat" class="form-label">Nama Sertifikat</label>
+                                <input type="text" class="form-control" id="nama_sertifikat" name="nama_sertifikat" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tanggal_terbit" class="form-label">Tanggal Terbit</label>
+                                <input type="date" class="form-control" id="tanggal_terbit" name="tanggal_terbit" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="deskripsi" class="form-label">Deskripsi</label>
+                                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
