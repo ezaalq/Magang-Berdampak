@@ -30,38 +30,38 @@
                         <td>{{ $nilai->nilai_index }}</td>
                         <td><span class="badge bg-{{ $nilai->status == 'lulus' ? 'success' : 'secondary' }}">{{ ucfirst($nilai->status) }}</span></td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modalEditNilaiIndex{{ $nilai->id_nilai_index }}">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusNilaiIndex{{ $nilai->id_nilai_index }}">Hapus</button>
+                            <button type="button" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modalEditNilaiIndex{{ $nilai->id }}">Edit</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusNilaiIndex{{ $nilai->id }}">Hapus</button>
                         </td>
                     </tr>
                     <!-- Modal Edit Nilai Index -->
-                    <div class="modal fade" id="modalEditNilaiIndex{{ $nilai->id_nilai_index }}" tabindex="-1" aria-labelledby="modalEditNilaiIndexLabel{{ $nilai->id_nilai_index }}" aria-hidden="true">
+                    <div class="modal fade" id="modalEditNilaiIndex{{ $nilai->id }}" tabindex="-1" aria-labelledby="modalEditNilaiIndexLabel{{ $nilai->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="{{ route('nilai_index.update', $nilai->id_nilai_index) }}" method="POST">
+                                <form action="{{ route('nilai_index.update', $nilai->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalEditNilaiIndexLabel{{ $nilai->id_nilai_index }}">Edit Nilai Index</h5>
+                                        <h5 class="modal-title" id="modalEditNilaiIndexLabel{{ $nilai->id }}">Edit Nilai Index</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="id_mahasiswa_edit{{ $nilai->id_nilai_index }}" class="form-label">Mahasiswa</label>
-                                            <select class="form-select" id="id_mahasiswa_edit{{ $nilai->id_nilai_index }}" name="id_mahasiswa" required>
+                                            <label for="id_mahasiswa_edit{{ $nilai->id }}" class="form-label">Mahasiswa</label>
+                                            <select class="form-select" id="id_mahasiswa_edit{{ $nilai->id }}" name="id_mahasiswa" required>
                                                 <option value="">Pilih Mahasiswa</option>
                                                 @foreach(\App\Models\Mahasiswa::all() as $mhs)
-                                                    <option value="{{ $mhs->id_mahasiswa }}" {{ $nilai->id_mahasiswa == $mhs->id_mahasiswa ? 'selected' : '' }}>{{ $mhs->nim }} - {{ $mhs->nama }}</option>
+                                                    <option value="{{ $mhs->id }}" {{ $nilai->id_mahasiswa == $mhs->id ? 'selected' : '' }}>{{ $mhs->nim }} - {{ $mhs->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="nilai_index_edit{{ $nilai->id_nilai_index }}" class="form-label">Nilai Index</label>
-                                            <input type="number" step="0.01" class="form-control" id="nilai_index_edit{{ $nilai->id_nilai_index }}" name="nilai_index" value="{{ $nilai->nilai_index }}" required>
+                                            <label for="nilai_index_edit{{ $nilai->id }}" class="form-label">Nilai Index</label>
+                                            <input type="number" step="0.01" class="form-control" id="nilai_index_edit{{ $nilai->id }}" name="nilai_index" value="{{ $nilai->nilai_index }}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="status_edit{{ $nilai->id_nilai_index }}" class="form-label">Status</label>
-                                            <select class="form-select" id="status_edit{{ $nilai->id_nilai_index }}" name="status" required>
+                                            <label for="status_edit{{ $nilai->id }}" class="form-label">Status</label>
+                                            <select class="form-select" id="status_edit{{ $nilai->id }}" name="status" required>
                                                 <option value="lulus" {{ $nilai->status == 'lulus' ? 'selected' : '' }}>Lulus</option>
                                                 <option value="tidak lulus" {{ $nilai->status == 'tidak lulus' ? 'selected' : '' }}>Tidak Lulus</option>
                                             </select>
@@ -76,14 +76,14 @@
                         </div>
                     </div>
                     <!-- Modal Hapus Nilai Index -->
-                    <div class="modal fade" id="modalHapusNilaiIndex{{ $nilai->id_nilai_index }}" tabindex="-1" aria-labelledby="modalHapusNilaiIndexLabel{{ $nilai->id_nilai_index }}" aria-hidden="true">
+                    <div class="modal fade" id="modalHapusNilaiIndex{{ $nilai->id }}" tabindex="-1" aria-labelledby="modalHapusNilaiIndexLabel{{ $nilai->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="{{ route('nilai_index.destroy', $nilai->id_nilai_index) }}" method="POST">
+                                <form action="{{ route('nilai_index.destroy', $nilai->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalHapusNilaiIndexLabel{{ $nilai->id_nilai_index }}">Konfirmasi Hapus</h5>
+                                        <h5 class="modal-title" id="modalHapusNilaiIndexLabel{{ $nilai->id }}">Konfirmasi Hapus</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -119,7 +119,7 @@
                                 <select class="form-select" id="id_mahasiswa" name="id_mahasiswa" required>
                                     <option value="">Pilih Mahasiswa</option>
                                     @foreach(\App\Models\Mahasiswa::all() as $mhs)
-                                        <option value="{{ $mhs->id_mahasiswa }}">{{ $mhs->nim }} - {{ $mhs->nama }}</option>
+                                        <option value="{{ $mhs->id }}">{{ $mhs->nim }} - {{ $mhs->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>

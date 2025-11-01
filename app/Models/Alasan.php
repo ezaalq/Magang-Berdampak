@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Alasan extends Model
 {
     use HasFactory;
+
     protected $table = 'alasan';
+
     protected $fillable = [
-        'id_mahasiswa', 'tanggal', 'alasan'
+        'id_mahasiswa', 'tanggal', 'alasan',
     ];
+
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');

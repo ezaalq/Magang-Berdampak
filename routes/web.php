@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\LaporanController;
+use Illuminate\Support\Facades\Route;
 
 // Guest routes
 Route::middleware('guest')->group(function () {
@@ -25,9 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('absen', App\Http\Controllers\AbsenController::class);
     Route::resource('kegiatan', App\Http\Controllers\KegiatanController::class);
     Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);
-    Route::resource('laporan', App\Http\Controllers\LaporanController::class)->parameters([
-        'laporan' => 'laporan:id_laporan'
-    ]);
+    Route::resource('laporan', App\Http\Controllers\LaporanController::class);
     Route::resource('nilai_index', App\Http\Controllers\NilaiIndexController::class);
     Route::resource('sertifikat', App\Http\Controllers\SertifikatController::class);
 

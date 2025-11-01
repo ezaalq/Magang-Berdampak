@@ -148,7 +148,7 @@
                                 <select class="form-select" id="id_mahasiswa" name="id_mahasiswa" required>
                                     <option value="">Pilih Mahasiswa</option>
                                     @foreach(\App\Models\Mahasiswa::all() as $mhs)
-                                        <option value="{{ $mhs->id_mahasiswa }}">{{ $mhs->nim }} - {{ $mhs->nama }}</option>
+                                        <option value="{{ $mhs->id }}">{{ $mhs->nim }} - {{ $mhs->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>

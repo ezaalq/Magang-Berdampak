@@ -40,41 +40,41 @@
                             @endif
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modalEditSertifikat{{ $sertifikat->id_sertifikat }}">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusSertifikat{{ $sertifikat->id_sertifikat }}">Hapus</button>
+                            <button type="button" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modalEditSertifikat{{ $sertifikat->id }}">Edit</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusSertifikat{{ $sertifikat->id }}">Hapus</button>
                         </td>
                     <!-- Modal Edit Sertifikat -->
-                    <div class="modal fade" id="modalEditSertifikat{{ $sertifikat->id_sertifikat }}" tabindex="-1" aria-labelledby="modalEditSertifikatLabel{{ $sertifikat->id_sertifikat }}" aria-hidden="true">
+                    <div class="modal fade" id="modalEditSertifikat{{ $sertifikat->id }}" tabindex="-1" aria-labelledby="modalEditSertifikatLabel{{ $sertifikat->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="{{ route('sertifikat.update', $sertifikat->id_sertifikat) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('sertifikat.update', $sertifikat->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalEditSertifikatLabel{{ $sertifikat->id_sertifikat }}">Edit Sertifikat</h5>
+                                        <h5 class="modal-title" id="modalEditSertifikatLabel{{ $sertifikat->id }}">Edit Sertifikat</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="id_mahasiswa_edit{{ $sertifikat->id_sertifikat }}" class="form-label">Mahasiswa</label>
-                                            <select class="form-select" id="id_mahasiswa_edit{{ $sertifikat->id_sertifikat }}" name="id_mahasiswa" required>
+                                            <label for="id_mahasiswa_edit{{ $sertifikat->id }}" class="form-label">Mahasiswa</label>
+                                            <select class="form-select" id="id_mahasiswa_edit{{ $sertifikat->id }}" name="id_mahasiswa" required>
                                                 <option value="">Pilih Mahasiswa</option>
                                                 @foreach(\App\Models\Mahasiswa::all() as $mhs)
-                                                    <option value="{{ $mhs->id_mahasiswa }}" {{ $sertifikat->id_mahasiswa == $mhs->id_mahasiswa ? 'selected' : '' }}>{{ $mhs->nim }} - {{ $mhs->nama }}</option>
+                                                    <option value="{{ $mhs->id }}" {{ $sertifikat->id_mahasiswa == $mhs->id ? 'selected' : '' }}>{{ $mhs->nim }} - {{ $mhs->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="nama_sertifikat_edit{{ $sertifikat->id_sertifikat }}" class="form-label">Nama Sertifikat</label>
-                                            <input type="text" class="form-control" id="nama_sertifikat_edit{{ $sertifikat->id_sertifikat }}" name="nama_sertifikat" value="{{ $sertifikat->nama_sertifikat }}" required>
+                                            <label for="nama_sertifikat_edit{{ $sertifikat->id }}" class="form-label">Nama Sertifikat</label>
+                                            <input type="text" class="form-control" id="nama_sertifikat_edit{{ $sertifikat->id }}" name="nama_sertifikat" value="{{ $sertifikat->nama_sertifikat }}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="tanggal_terbit_edit{{ $sertifikat->id_sertifikat }}" class="form-label">Tanggal Terbit</label>
-                                            <input type="date" class="form-control" id="tanggal_terbit_edit{{ $sertifikat->id_sertifikat }}" name="tanggal_terbit" value="{{ $sertifikat->tanggal_terbit }}" required>
+                                            <label for="tanggal_terbit_edit{{ $sertifikat->id }}" class="form-label">Tanggal Terbit</label>
+                                            <input type="date" class="form-control" id="tanggal_terbit_edit{{ $sertifikat->id }}" name="tanggal_terbit" value="{{ $sertifikat->tanggal_terbit }}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="deskripsi_edit{{ $sertifikat->id_sertifikat }}" class="form-label">Deskripsi</label>
-                                            <textarea class="form-control" id="deskripsi_edit{{ $sertifikat->id_sertifikat }}" name="deskripsi" rows="3">{{ $sertifikat->deskripsi }}</textarea>
+                                            <label for="deskripsi_edit{{ $sertifikat->id }}" class="form-label">Deskripsi</label>
+                                            <textarea class="form-control" id="deskripsi_edit{{ $sertifikat->id }}" name="deskripsi" rows="3">{{ $sertifikat->deskripsi }}</textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -86,14 +86,14 @@
                         </div>
                     </div>
                     <!-- Modal Hapus Sertifikat -->
-                    <div class="modal fade" id="modalHapusSertifikat{{ $sertifikat->id_sertifikat }}" tabindex="-1" aria-labelledby="modalHapusSertifikatLabel{{ $sertifikat->id_sertifikat }}" aria-hidden="true">
+                    <div class="modal fade" id="modalHapusSertifikat{{ $sertifikat->id }}" tabindex="-1" aria-labelledby="modalHapusSertifikatLabel{{ $sertifikat->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="{{ route('sertifikat.destroy', $sertifikat->id_sertifikat) }}" method="POST">
+                                <form action="{{ route('sertifikat.destroy', $sertifikat->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalHapusSertifikatLabel{{ $sertifikat->id_sertifikat }}">Konfirmasi Hapus</h5>
+                                        <h5 class="modal-title" id="modalHapusSertifikatLabel{{ $sertifikat->id }}">Konfirmasi Hapus</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -130,7 +130,7 @@
                                 <select class="form-select" id="id_mahasiswa" name="id_mahasiswa" required>
                                     <option value="">Pilih Mahasiswa</option>
                                     @foreach(\App\Models\Mahasiswa::all() as $mhs)
-                                        <option value="{{ $mhs->id_mahasiswa }}">{{ $mhs->nim }} - {{ $mhs->nama }}</option>
+                                        <option value="{{ $mhs->id }}">{{ $mhs->nim }} - {{ $mhs->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>

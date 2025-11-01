@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Absen;
+use Illuminate\Database\Seeder;
 
 class AbsenSeeder extends Seeder
 {

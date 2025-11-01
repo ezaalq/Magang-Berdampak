@@ -54,55 +54,55 @@
                                     <span class="badge bg-{{ $s['class'] }}">{{ $s['label'] }}</span>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditAbsen{{ $kegiatan->id_kegiatan }}">Edit</button>
+                                        data-bs-target="#modalEditAbsen{{ $kegiatan->id }}">Edit</button>
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#modalHapusAbsen{{ $kegiatan->id_kegiatan }}">Hapus</button>
+                                        data-bs-target="#modalHapusAbsen{{ $kegiatan->id }}">Hapus</button>
                                 </td>
                             </tr>
 
                             <!-- Modal Edit Kegiatan -->
-                            <div class="modal fade" id="modalEditKegiatan{{ $kegiatan->id_kegiatan }}" tabindex="-1"
-                                aria-labelledby="modalEditKegiatanLabel{{ $kegiatan->id_kegiatan }}" aria-hidden="true">
+                            <div class="modal fade" id="modalEditKegiatan{{ $kegiatan->id }}" tabindex="-1"
+                                aria-labelledby="modalEditKegiatanLabel{{ $kegiatan->id }}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="{{ route('kegiatan.update', $kegiatan->id_kegiatan) }}"
+                                        <form action="{{ route('kegiatan.update', $kegiatan->id) }}"
                                             method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-header">
                                                 <h5 class="modal-title"
-                                                    id="modalEditKegiatanLabel{{ $kegiatan->id_kegiatan }}">Edit
+                                                    id="modalEditKegiatanLabel{{ $kegiatan->id }}">Edit
                                                     Kegiatan</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="mb-3">
-                                                    <label for="id_mahasiswa_edit{{ $kegiatan->id_kegiatan }}"
+                                                    <label for="id_mahasiswa_edit{{ $kegiatan->id }}"
                                                         class="form-label">Mahasiswa</label>
                                                     <select class="form-select"
-                                                        id="id_mahasiswa_edit{{ $kegiatan->id_kegiatan }}"
+                                                        id="id_mahasiswa_edit{{ $kegiatan->id }}"
                                                         name="id_mahasiswa" required>
                                                         <option value="">Pilih Mahasiswa</option>
                                                         @foreach (\App\Models\Mahasiswa::all() as $mhs)
-                                                            <option value="{{ $mhs->id_mahasiswa }}"
-                                                                {{ $kegiatan->id_mahasiswa == $mhs->id_mahasiswa ? 'selected' : '' }}>
+                                                            <option value="{{ $mhs->id }}"
+                                                                {{ $kegiatan->id_mahasiswa == $mhs->id ? 'selected' : '' }}>
                                                                 {{ $mhs->nim }} - {{ $mhs->nama }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="judul_edit{{ $kegiatan->id_kegiatan }}"
+                                                    <label for="judul_edit{{ $kegiatan->id }}"
                                                         class="form-label">Judul</label>
                                                     <input type="text" class="form-control"
-                                                        id="judul_edit{{ $kegiatan->id_kegiatan }}" name="judul"
+                                                        id="judul_edit{{ $kegiatan->id }}" name="judul"
                                                         value="{{ $kegiatan->judul }}" required>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="kategori_edit{{ $kegiatan->id_kegiatan }}"
+                                                    <label for="kategori_edit{{ $kegiatan->id }}"
                                                         class="form-label">Kategori</label>
                                                     <select class="form-select"
-                                                        id="kategori_edit{{ $kegiatan->id_kegiatan }}" name="kategori"
+                                                        id="kategori_edit{{ $kegiatan->id }}" name="kategori"
                                                         required>
                                                         <option value="foto"
                                                             {{ $kegiatan->kategori == 'foto' ? 'selected' : '' }}>Foto
@@ -116,10 +116,10 @@
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="file_kegiatan_edit{{ $kegiatan->id_kegiatan }}"
+                                                    <label for="file_kegiatan_edit{{ $kegiatan->id }}"
                                                         class="form-label">File Kegiatan (opsional)</label>
                                                     <input type="file" class="form-control"
-                                                        id="file_kegiatan_edit{{ $kegiatan->id_kegiatan }}"
+                                                        id="file_kegiatan_edit{{ $kegiatan->id }}"
                                                         name="file_kegiatan" accept="image/*,application/pdf">
                                                     @if ($kegiatan->file_kegiatan)
                                                         <small class="text-muted">File saat ini: <a
@@ -128,10 +128,10 @@
                                                     @endif
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="status_edit{{ $kegiatan->id_kegiatan }}"
+                                                    <label for="status_edit{{ $kegiatan->id }}"
                                                         class="form-label">Status</label>
                                                     <select class="form-select"
-                                                        id="status_edit{{ $kegiatan->id_kegiatan }}" name="status"
+                                                        id="status_edit{{ $kegiatan->id }}" name="status"
                                                         required>
                                                         <option value="menunggu"
                                                             {{ $kegiatan->status == 'menunggu' ? 'selected' : '' }}>
@@ -157,17 +157,17 @@
                             </div>
 
                             <!-- Modal Hapus Kegiatan -->
-                            <div class="modal fade" id="modalHapusKegiatan{{ $kegiatan->id_kegiatan }}" tabindex="-1"
-                                aria-labelledby="modalHapusKegiatanLabel{{ $kegiatan->id_kegiatan }}" aria-hidden="true">
+                            <div class="modal fade" id="modalHapusKegiatan{{ $kegiatan->id }}" tabindex="-1"
+                                aria-labelledby="modalHapusKegiatanLabel{{ $kegiatan->id }}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="{{ route('kegiatan.destroy', $kegiatan->id_kegiatan) }}"
+                                        <form action="{{ route('kegiatan.destroy', $kegiatan->id) }}"
                                             method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <div class="modal-header">
                                                 <h5 class="modal-title"
-                                                    id="modalHapusKegiatanLabel{{ $kegiatan->id_kegiatan }}">
+                                                    id="modalHapusKegiatanLabel{{ $kegiatan->id }}">
                                                     Konfirmasi Hapus</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
@@ -209,7 +209,7 @@
                                 <select class="form-select" id="id_mahasiswa" name="id_mahasiswa" required>
                                     <option value="">Pilih Mahasiswa</option>
                                     @foreach (\App\Models\Mahasiswa::all() as $mhs)
-                                        <option value="{{ $mhs->id_mahasiswa }}">{{ $mhs->nim }} -
+                                        <option value="{{ $mhs->id }}">{{ $mhs->nim }} -
                                             {{ $mhs->nama }}</option>
                                     @endforeach
                                 </select>

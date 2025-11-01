@@ -38,14 +38,14 @@
                         <td>{{ $mhs->alamat }}</td>
                         <td><span class="badge bg-{{ $mhs->role == 'admin' ? 'danger' : 'info' }}">{{ ucfirst($mhs->role) }}</span></td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modalEditMahasiswa{{ $mhs->id_mahasiswa }}">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusMahasiswa{{ $mhs->id_mahasiswa }}">Hapus</button>
+                            <button type="button" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modalEditMahasiswa{{ $mhs->id }}">Edit</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusMahasiswa{{ $mhs->id }}">Hapus</button>
                         </td>
                     <!-- Modal Edit Mahasiswa -->
-                    <div class="modal fade" id="modalEditMahasiswa{{ $mhs->id_mahasiswa }}" tabindex="-1" aria-labelledby="modalEditMahasiswaLabel{{ $mhs->id_mahasiswa }}" aria-hidden="true">
+                    <div class="modal fade" id="modalEditMahasiswa{{ $mhs->id }}" tabindex="-1" aria-labelledby="modalEditMahasiswaLabel{{ $mhs->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="{{ route('mahasiswa.update', $mhs->id_mahasiswa) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('mahasiswa.update', $mhs->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-header">
@@ -105,10 +105,10 @@
                         </div>
                     </div>
                     <!-- Modal Hapus Mahasiswa -->
-                    <div class="modal fade" id="modalHapusMahasiswa{{ $mhs->id_mahasiswa }}" tabindex="-1" aria-labelledby="modalHapusMahasiswaLabel{{ $mhs->id_mahasiswa }}" aria-hidden="true">
+                    <div class="modal fade" id="modalHapusMahasiswa{{ $mhs->id }}" tabindex="-1" aria-labelledby="modalHapusMahasiswaLabel{{ $mhs->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="{{ route('mahasiswa.destroy', $mhs->id_mahasiswa) }}" method="POST">
+                                <form action="{{ route('mahasiswa.destroy', $mhs->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <div class="modal-header">

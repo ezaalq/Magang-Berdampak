@@ -2,47 +2,45 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Mail\ResetPasswordMail;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Rules\Email;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
- public function login(Request $request)
+    public function login(Request $request)
     {
         if ($request->isMethod('get')) {
             if (Auth::check()) {
                 return redirect()->route('dashboard');
             }
+
             return view('Auth.login');
         }
 
-    $credentials = $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|string',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ], [
             'email.required' => 'email wajib diisi',
-            'password.required' => 'Password wajib diisi'
+            'password.required' => 'Password wajib diisi',
         ]);
-
 
         $user = Mahasiswa::where('email', $credentials['email'])->first();
 
-        if (!$user) {
+        if (! $user) {
             return back()->withErrors([
                 'login_error' => 'Email tidak ditemukan',
             ])->withInput($request->only('email'));
         }
 
         // Verifikasi password
-    if (!Hash::check($credentials['password'], $user->password)) {
+        if (! Hash::check($credentials['password'], $user->password)) {
             return back()->withErrors([
                 'login_error' => 'Password salah',
             ])->withInput($request->only('email'));
@@ -61,6 +59,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('login');
     }
 
@@ -70,13 +69,12 @@ class AuthController extends Controller
             return view('Auth.register');
         }
 
-
         $validator = Validator::make($request->all(), [
             'nim' => 'required|unique:tabel_mahasiswa,nim',
             'nama' => 'required',
             'email' => 'required|email|unique:tabel_mahasiswa,email',
             'password' => 'required|min:6|confirmed',
-        ],[
+        ], [
             'nim.required' => 'NIM wajib diisi',
             'nim.unique' => 'NIM sudah digunakan',
             'nama.required' => 'Nama wajib diisi',
@@ -91,7 +89,6 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
 
         Mahasiswa::create([
             'nim' => $request->nim,
@@ -124,14 +121,13 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-
-        if (!Hash::check($request->current_password, Auth::user()->password)) {
+        if (! Hash::check($request->current_password, Auth::user()->password)) {
             return back()->withErrors(['current_password' => 'Password saat ini salah']);
         }
 
-    $user = Mahasiswa::find(Auth::id());
-    $user->password = Hash::make($request->password);
-    $user->save();
+        $user = Mahasiswa::find(Auth::id());
+        $user->password = Hash::make($request->password);
+        $user->save();
 
         return redirect()->route('dashboard')->with('success', 'Password berhasil diubah!');
     }
@@ -147,14 +143,16 @@ class AuthController extends Controller
                 $resetLink = route('resetPassword', ['email' => $user->email]);
                 if ($user->email) {
                     Mail::to($user->email)->send(new ResetPasswordMail($resetLink));
+
                     return back()->with('success', 'Link reset password sudah dikirim ke email Anda.');
                 } else {
-                    return back()->with('success', 'Email tidak ditemukan. Link reset password: <a href="' . $resetLink . '">' . $resetLink . '</a>');
+                    return back()->with('success', 'Email tidak ditemukan. Link reset password: <a href="'.$resetLink.'">'.$resetLink.'</a>');
                 }
             } else {
                 return back()->withErrors(['email' => 'Email tidak ditemukan']);
             }
         }
+
         return view('Auth.forgot-password');
     }
 
@@ -176,6 +174,7 @@ class AuthController extends Controller
         }
         $user->password = Hash::make($request->password);
         $user->save();
+
         return redirect()->route('login')->with('success', 'Password berhasil direset!');
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Alasan;
+use Illuminate\Database\Seeder;
 
 class AlasanSeeder extends Seeder
 {

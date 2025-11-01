@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\NilaiIndex;
+use Illuminate\Database\Seeder;
 
 class NilaiIndexSeeder extends Seeder
 {

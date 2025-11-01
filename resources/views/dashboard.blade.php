@@ -135,7 +135,7 @@
                         <label for="bukti_absen" class="form-label">Bukti Absen (Opsional)</label>
                         <input type="file" class="form-control" id="bukti_absen" name="bukti_absen" accept=".jpg,.jpeg,.png,.pdf">
                     </div>
-                    <input type="hidden" name="id_mahasiswa" value="{{ auth()->user()->id_mahasiswa }}">
+                    <input type="hidden" name="id_mahasiswa" value="{{ auth()->user()->id }}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
